@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/knip/schema.jsonc",
   // we ignore shadcn/ui components because we don't want to remove exports from them
-  "ignore": ["src/components/ui/**"]
+  "ignore": ["src/components/ui/**", "scripts/**"],
+  "ignoreDependencies": ["dotenv"]
 }

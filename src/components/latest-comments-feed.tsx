@@ -25,7 +25,8 @@ export function LatestCommentsFeed({ comments }: LatestCommentsFeedProps) {
           key={comment.id}
           comment={comment}
           showPageInfo={true}
-          hideActions={true}
+          suppressReplies={true}
+          showThreadNavigation={true}
         />
       ))}
     </div>

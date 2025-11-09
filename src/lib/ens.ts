@@ -13,8 +13,9 @@ const addressToNameCache = new Map<string, string | null>();
 export async function resolveENS(
   nameOrAddress: string,
 ): Promise<{ ensName: string | null; address: string | null }> {
-  if (isAddress(nameOrAddress)) {
-    const address = getAddress(nameOrAddress);
+  const lowerCaseNameOrAddress = nameOrAddress.toLowerCase();
+  if (isAddress(lowerCaseNameOrAddress)) {
+    const address = getAddress(lowerCaseNameOrAddress);
     let name: string | null = addressToNameCache.get(address) ?? null;
 
     if (!name) {
@@ -35,23 +36,24 @@ export async function resolveENS(
     }
     return {
       ensName: name,
-      address: nameOrAddress,
+      address: address,
     };
   }
 
-  let address: string | null = nameToAddressCache.get(nameOrAddress) ?? null;
+  let address: string | null =
+    nameToAddressCache.get(lowerCaseNameOrAddress) ?? null;
   if (!address) {
     const [mainnetAddress, baseAddress] = await Promise.all([
       resolveAddress({
         client,
-        name: nameOrAddress,
+        name: lowerCaseNameOrAddress,
         resolverChain: mainnet,
       }).catch(() => {
         return null;
       }),
       resolveAddress({
         client,
-        name: nameOrAddress,
+        name: lowerCaseNameOrAddress,
         resolverAddress: BASENAME_RESOLVER_ADDRESS,
         resolverChain: base,
       }).catch(() => {
@@ -71,12 +73,12 @@ export async function resolveENS(
 
   if (address) {
     address = getAddress(address);
-    nameToAddressCache.set(nameOrAddress, address);
-    addressToNameCache.set(address, nameOrAddress);
+    nameToAddressCache.set(lowerCaseNameOrAddress, address);
+    addressToNameCache.set(address, lowerCaseNameOrAddress);
   }
 
   return {
-    ensName: nameOrAddress,
+    ensName: lowerCaseNameOrAddress,
     address: address,
   };
 }
