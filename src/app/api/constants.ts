@@ -12,7 +12,7 @@ export function getDynamicPrice(replyCount: number): ERC20TokenAmount {
       decimals: 18,
       eip712: {
         name: "x402.chat",
-        version: "1.0.0",
+        version: "1",
         primaryType: "Permit",
       },
     },
