@@ -17,7 +17,7 @@ In this app the thirdweb x402 facilitator handles the purchase of CHAT tokens, a
 - **Single Function**: One `settlePayment()` call handles the entire payment flow
 - **Multi-Chain**: Supports 170+ EVM chains (Ethereum, Arbitrum, Base, Polygon, and more)
 - **Multi-Token**: Accepts 400+ tokens (any ERC-3009 and ERC-2612 token)
-- **Speed settings**: Configure when to consider a payment succesful, from simulated to confirmed
+- **Speed settings**: Configure when to consider a payment successful, from simulated to confirmed
 - **Dynamic Pricing**: Calculate prices based on your own logic
 
 ### Example Usage
